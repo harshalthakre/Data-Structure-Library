@@ -26,7 +26,7 @@ public class BinaryTree<Template>{
 		Queue<Node> queue=new Queue<Node>();
 		queue.enqueue(root);
 
-		while(!queue.isEmpty())
+		while(!queue.isEmpty()) 
 		{
 			Node temp=queue.dequeue();
 			if(temp.left==null)
@@ -287,7 +287,212 @@ public class BinaryTree<Template>{
 				currentLevel=nextLevel;
 				nextLevel=stk;
 			}
+
 		}
 	}
 
+
+	public void levelOrderReverse()
+	{
+		if(root==null)
+			return;
+		LinkedList<Node> queue=new LinkedList<Node>();
+		LinkedList<Node> stack=new LinkedList<Node>();
+		
+		Node temp=null;
+
+		queue.add(root);
+		while(queue.size()!=0)
+		{
+			temp=queue.pop();
+
+			if(temp.right!=null)
+				queue.add(temp.right);
+			if(temp.left!=null)
+				queue.add(temp.left);
+			stack.push(temp);
+		}
+
+		while(stack.size()!=0)
+			System.out.print(stack.pop().data+" ");
+	}
+
+
+	int maxLevelSum(){
+		if(root==null)
+			return 0;
+		LinkedList<Node> queue=new LinkedList<Node>();
+		queue.add(root);
+		queue.add(null);
+		Node temp;
+		int sum=0;
+		int max=Integer.MIN_VALUE;
+		while(queue.size()!=0)
+		{
+			temp=queue.pop();
+			if(temp!=null)
+				{
+					Object o=temp.data;
+					sum+=(Integer)o;
+
+					if(temp.left!=null)
+				queue.add(temp.left);
+
+			if(temp.right!=null)
+				queue.add(temp.right);
+
+				}
+			else{
+				if(queue.size()!=0)
+				{
+					queue.add(null);
+				}
+				if(sum>max)
+				{
+					max=sum;
+					sum=0;
+				}
+			}
+
+			
+
+		}
+
+		return max;
+	}
+
+	Template lca(int n1,int n2)
+	{
+		Node temp=lca(root,n1,n2);
+		return temp.data;
+	}
+
+	Node lca(Node root,int n1,int n2)
+	{
+		if(root==null)
+			return null;
+		Integer data=(Integer)root.data;
+		if(data==n1||data==n2)
+		{
+			return root;
+		}
+
+		Node left=lca(root.left,n1,n2);
+		Node right=lca(root.right,n1,n2);
+
+		// if both are non null the thier root parent will be lca
+		if(left!=null&&right!=null)
+			return root;
+
+		// if any one is non null check whether left or right whatever is present whetehr it is lca or not
+		return (left!=null)?left:right;
+	}
+
+
+	void makeMirror()
+	{
+		Node temp=makeMirror(root);
+	}
+
+	Node makeMirror(Node root)
+	{
+		if(root!=null){
+			makeMirror(root.left);
+			makeMirror(root.right);
+
+			//swap left and right subtree
+
+			Node temp=root.left;
+			root.left=root.right;
+			root.right=temp;
+		}
+		return root;
+	}
+
+	void printPathtoLeaf()
+	{
+		int path[]=new int[100];
+		int pathlen=0;
+		printPathtoLeaf(root,path,pathlen);
+	}
+
+	void printPathtoLeaf(Node root,int[] path,int pathlen){
+		if(root==null)
+			return;
+		// append this path to array
+
+		path[pathlen]=(Integer)root.data;
+		pathlen++;
+		if(root.left==null&&root.right==null)
+		{
+			printArray(path,pathlen);
+		}
+
+		else{
+			printPathtoLeaf(root.left,path,pathlen);
+			printPathtoLeaf(root.right,path,pathlen);
+		}
+	}
+
+	void printArray(int[] path,int pathlen){
+		for(int i=0;i<pathlen;i++)
+		{
+			System.out.print(path[i]+" ");
+		}
+		System.out.println();
+	}
+
+
+	void printAncestor(int findi)
+	{
+		printAncestor(root,findi);	
+	}
+	boolean printAncestor(Node root,int findi)
+	{
+		if(root==null) return false;
+
+		if((Integer)root.data==findi||(Integer)root.data==findi||printAncestor(root.left,findi)||printAncestor(root.right,findi))
+		{
+			System.out.print(root.data+" ");
+			return true;
+		}
+		return false;
+	}
+
+
+	void printVerticalSum()
+	{
+		printVerticalSum(root,0);
+
+		Set<Map.Entry<Integer,Integer>> hs=hm.entrySet();
+
+		// yeah u r right set is an interface
+		// and we are not creating object of set here, the internal object is implemented child of Set only.
+		Iterator itr=hs.iterator();
+		while(itr.hasNext())
+		{
+
+			// ir.next() also returns object
+			// now u will say how come then child Map.Entry is holding parent object 
+			// its not because internal object returned by itr.next() the internal object it contains is Map.Entry only
+			Map.Entry m1=(Map.Entry)itr.next();
+			System.out.print(m1.getValue()+" ");
+		}
+	}
+	LinkedHashMap<Integer,Integer> hm=new LinkedHashMap<Integer,Integer>();
+	void printVerticalSum(Node root,int column)
+	{
+		if(root==null) return;
+
+		printVerticalSum(root.left,column-1);
+
+		if(hm.get(column-1)!=null)
+		{
+			int no=hm.get(column-1);
+			hm.put(column-1,no+(Integer)root.data);
+		}
+		else hm.put(column-1,(Integer)root.data);
+
+		printVerticalSum(root.right,column+1);
+	}
 }

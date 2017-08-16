@@ -11,11 +11,12 @@ public class ApplicationBinaryTree{
 		bintree.insert(sc.nextInt());
 		bintree.insert(sc.nextInt());
 		bintree.insert(sc.nextInt());
-		bintree.insert(sc.nextInt());
-		bintree.insert(sc.nextInt());
+		//bintree.insert(sc.nextInt());
+		//bintree.insert(sc.nextInt());
 		System.out.println("\nLEVEL ORDER");
 		bintree.levelOrder();
-		System.out.println("\nINORDER");
+		
+		/*System.out.println("\nINORDER");
 		bintree.inorder();
 		System.out.println("\nPREORDER");
 		bintree.preorder();
@@ -25,6 +26,30 @@ public class ApplicationBinaryTree{
 		bintree.morrisTraversal();
 		System.out.println("\nMaximum Depth of Tree: "+bintree.maxDepth());
 		System.out.println("\nSize of the tree: "+bintree.getSize());
+		System.out.println("\nMaximum Depth of Tree without using Recurssion: "+bintree.getMaxDepth());*/
+
+		/*System.out.println("\nLEVEL ORDER Reverse: \n");
+		bintree.levelOrderReverse();
 		System.out.println("\nMaximum Depth of Tree without using Recurssion: "+bintree.getMaxDepth());
+
+		System.out.println("\nMaximum level sum is: "+bintree.maxLevelSum());
+
+		System.out.println("lca is: "+bintree.lca(sc.nextInt(),sc.nextInt()));
+
+		/*System.out.println("making miroor");
+		bintree.makeMirror();
+
+		System.out.println("\nLEVEL ORDER");
+		bintree.levelOrder();*/
+
+		/*System.out.println("getting path from root to leafs: ");
+		bintree.printPathtoLeaf();*/
+
+		System.out.println("\ngettig ancsestors");
+		bintree.printAncestor(sc.nextInt());
+
+		System.out.println("\nVertical sum: is: ");
+		bintree.printVerticalSum();
+
 	}
 }
