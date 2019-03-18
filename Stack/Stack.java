@@ -66,7 +66,7 @@ public class Stack<T>{
 			return false;
 	}
 
-	public void display()
+	public void printStack()
 	{
 		if(isStackEmpty())
 		{
@@ -82,6 +82,23 @@ public class Stack<T>{
 			}
 		}
 	}
+
+    public void display()
+    {
+        if(isStackEmpty())
+        {
+            System.out.println("ERROR !! Stack is Empty");
+
+        }
+        else{
+            Node temp=top;
+            while(temp!=null);
+            {
+                System.out.print(temp.data);
+                temp=temp.next;
+            }
+        }
+    }
 
 	public int getStackLength()
 	{
