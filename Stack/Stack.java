@@ -70,7 +70,7 @@ public class Stack<T>{
 	{
 		if(isStackEmpty())
 		{
-			System.out.println("Stack is Empty");
+			System.out.println("ERROR !! Stack is Empty");
 
 		}
 		else{
